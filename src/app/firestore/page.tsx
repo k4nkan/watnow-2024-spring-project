@@ -4,7 +4,7 @@ import { useDBPosts } from '@/hooks/use-db-posts';
 import { createDBPost } from '@/stores/firestore/posts';
 import { getDBUser, getUserDocRef } from '@/stores/firestore/users';
 import Image from 'next/image';
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 type Post = {
   createdAt: Date;
@@ -43,10 +43,12 @@ const Page = () => {
   const { authUser } = useAuthUser();
   const { posts, loading: dbPostLoading } = useDBPosts({ realtime: true });
   const [formattedPosts, setFormattedPosts] = useState<Post[]>([]);
+  const [formvaluestate, setFormvaluestate] = useState('初期状態');
 
   const submitHandler = async (e: FormEvent) => {
     e.preventDefault();
     if (!authUser) return;
+    console.log(content,"が送信されました")
     createDBPost({
       createdBy: getUserDocRef(authUser.uid),
       deletedAt: null,
@@ -75,14 +77,24 @@ const Page = () => {
     });
   }, [posts]);
 
+  const handlechange = (e:any) => {
+    const input_tect = e.target.value
+    console.log(input_tect)
+    setFormvaluestate(input_tect)
+    setContent(input_tect)
+  } 
+
   return (
     <div>
       <form onSubmit={submitHandler} className="mb-4 flex flex-col items-end">
         <textarea
           value={content}
-          onChange={(e) => setContent(e.target.value)}
+          onChange={handlechange}
           className="mb-4 w-full rounded border border-gray-300 p-2"
         />
+        <p>
+          {formvaluestate}
+        </p>
         <button
           type="submit"
           disabled={content.trim() === ''}
