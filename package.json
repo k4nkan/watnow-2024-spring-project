@@ -11,9 +11,13 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
     "@phosphor-icons/react": "^2.1.5",
     "autoprefixer": "^10.4.17",
     "firebase": "^10.11.0",
+    "framer-motion": "^11.2.6",
     "next": "14.1.0",
     "postcss": "^8.4.33",
     "react": "^18",
