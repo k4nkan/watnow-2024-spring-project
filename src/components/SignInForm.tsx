@@ -8,25 +8,24 @@ import {
   Divider
 } from '@chakra-ui/react';
 import GoogleGLogo from './GoogleGLogo';
+import InputWithTitle from './InputWithTitle';
 
 const SignInForm = () => {
   return (
-    <VStack
-        spacing={4}
-    >
-      <FormControl>
-        <FormLabel>メールアドレス</FormLabel>
-        <Input type="email" size='md' width='100%'/>
-      </FormControl>
-      <FormControl>
-        <FormLabel>パスワード</FormLabel>
-        <Input type="email" size='md' width='100%'/>
-      </FormControl>
-      <Button colorScheme='blue' size='md' width='100%'>
+    <VStack spacing={4}>
+      <InputWithTitle title='メールアドレス'></InputWithTitle>
+      <InputWithTitle title='パスワード'></InputWithTitle>
+      <Button colorScheme="blue" size="md" width="100%">
         続ける
       </Button>
-      <Divider/>
-      <Button leftIcon={<GoogleGLogo/>} colorScheme='gray' variant='outline' size='md' width='100%'>
+      <Divider />
+      <Button
+        leftIcon={<GoogleGLogo />}
+        colorScheme="gray"
+        variant="outline"
+        size="md"
+        width="100%"
+      >
         Googleでログイン
       </Button>
     </VStack>
