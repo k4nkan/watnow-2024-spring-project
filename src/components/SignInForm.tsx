@@ -1,3 +1,5 @@
+'use client';
+
 import {
   FormControl,
   FormLabel,
@@ -13,8 +15,8 @@ import InputWithTitle from './InputWithTitle';
 const SignInForm = () => {
   return (
     <VStack spacing={4}>
-      <InputWithTitle title='メールアドレス'></InputWithTitle>
-      <InputWithTitle title='パスワード'></InputWithTitle>
+      <InputWithTitle title="メールアドレス"></InputWithTitle>
+      <InputWithTitle title="パスワード"></InputWithTitle>
       <Button colorScheme="blue" size="md" width="100%">
         続ける
       </Button>
