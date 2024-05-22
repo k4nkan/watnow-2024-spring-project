@@ -1,5 +1,15 @@
 import Link from 'next/link';
 
+import {
+  FormControl,
+  FormLabel,
+  FormErrorMessage,
+  FormHelperText,
+  Input,
+  ChakraProvider
+} from '@chakra-ui/react';
+import SignInForm from '@/components/SignInForm';
+
 export default function Page() {
   return (
     <div className="mx-auto max-w-xl px-6 py-12">
@@ -20,6 +30,7 @@ export default function Page() {
           GitHub Repository
         </Link>
       </p>
+      <SignInForm></SignInForm>
     </div>
   );
 }

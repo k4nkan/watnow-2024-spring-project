@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 // These styles apply to every route in the application
 import '@/app/globals.css';
+import { ChakraProvider } from '@chakra-ui/react';
 
 // Initialize firebase app
 require('@/utils/firebase');
@@ -18,7 +19,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <ChakraProvider>{children}</ChakraProvider>
+      </body>
     </html>
   );
 }
