@@ -1,9 +1,5 @@
 import {
   Box,
-  FormControl,
-  FormLabel,
-  Input,
-  Text,
   VStack
 } from '@chakra-ui/react';
 import { ReactElement } from 'react';
