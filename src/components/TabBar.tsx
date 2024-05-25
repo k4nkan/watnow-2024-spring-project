@@ -3,10 +3,15 @@ import { Gear, House, PencilSimple } from '@phosphor-icons/react';
 import TabItem from './TabItem';
 import { HStack } from '@chakra-ui/react';
 
-const TabBar = () => {
+interface Props {
+  height?: string;
+}
+
+const TabBar = (props: Props) => {
+  const height = props.height ?? '80px';
   return (
     <>
-      <HStack justifyContent={'space-evenly'}>
+      <HStack justifyContent={'space-evenly'} w={'100%'} h={height}>
         <TabItem title="ホーム" icon={<House size={32} />} />
         <TabItem title="連絡" icon={<PencilSimple size={32} />} />
         <TabItem title="設定" icon={<Gear size={32} />} />
