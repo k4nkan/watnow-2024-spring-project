@@ -6,13 +6,13 @@ import {
   AlertDescription,
   CloseButton,
   Button,
-  VStack,
+  VStack
 } from '@chakra-ui/react';
 import { ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
 
-interface alartProps {
-  alartColorScheme:
+interface alertProps {
+  alertColorScheme:
     | 'success'
     | 'info'
     | 'warning'
@@ -25,18 +25,24 @@ interface alartProps {
   destination: string;
 }
 
-function AlertItem(props: alartProps) {
+function AlertItem(props: alertProps) {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
     <>
       {isVisible && (
-        <Alert borderRadius='lg' status={props.alartColorScheme}>
+        <Alert borderRadius="lg" status={props.alertColorScheme}>
           <AlertIcon />
-          <VStack width="100%" alignItems={"flex-start"}>
+          <VStack width="100%" alignItems={'flex-start'}>
             <AlertTitle>{props.titleText}</AlertTitle>
             <AlertDescription>{props.descriptionText}</AlertDescription>
-            <Button rightIcon={<ArrowRight size={14} weight='bold'/>} width="100%" variant={"solid"} size={"sm"} colorScheme={props.buttonColorScheme}>
+            <Button
+              rightIcon={<ArrowRight size={14} weight="bold" />}
+              width="100%"
+              variant={'solid'}
+              size={'sm'}
+              colorScheme={props.buttonColorScheme}
+            >
               {props.destination} に移動
             </Button>
           </VStack>
