@@ -1,26 +1,20 @@
-import {
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  Input,
-  Button,
-  VStack,
-  Divider
-} from '@chakra-ui/react';
+'use client';
+
+import { Button, VStack, Divider } from '@chakra-ui/react';
 import GoogleGLogo from './GoogleGLogo';
 import InputWithTitle from './InputWithTitle';
 
 const SignInForm = () => {
   return (
     <VStack spacing={4}>
-      <InputWithTitle title='メールアドレス'></InputWithTitle>
-      <InputWithTitle title='パスワード'></InputWithTitle>
+      <InputWithTitle title="メールアドレス" />
+      <InputWithTitle title="パスワード" />
       <Button colorScheme="blue" size="md" width="100%">
         続ける
       </Button>
       <Divider />
       <Button
-        leftIcon={<GoogleGLogo />}
+        leftIcon={<GoogleGLogo size={16} />}
         colorScheme="gray"
         variant="outline"
         size="md"

@@ -1,9 +1,13 @@
 import Image from 'next/image';
 
-const GoogleGLogo = () => {
+interface sizeProps {
+  size: number;
+}
+
+function GoogleGLogo({ size }: sizeProps) {
   return (
-    <Image src="/GoogleGLogo.svg" width={16} height={16} alt="GoogleLogo" />
+    <Image src="/GoogleGLogo.svg" width={size} height={size} alt="GoogleLogo" />
   );
-};
+}
 
 export default GoogleGLogo;
