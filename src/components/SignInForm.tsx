@@ -17,7 +17,8 @@ const SignInForm = () => {
         router.push('/home');
       })
       .catch((error) => {
-        console.log('異常終了！', error);
+        // TODO: エラー内容を表示する
+        console.error(error);
       });
   };
 
