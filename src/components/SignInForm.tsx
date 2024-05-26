@@ -2,13 +2,13 @@
 
 import { Button, VStack, Divider } from '@chakra-ui/react';
 import GoogleGLogo from './GoogleGLogo';
-import InputWithTitle from './InputWithTitle';
+import InputWithLabel from './InputWithLabel';
 
 const SignInForm = () => {
   return (
     <VStack spacing={4}>
-      <InputWithTitle title="メールアドレス" />
-      <InputWithTitle title="パスワード" />
+      <InputWithLabel label="メールアドレス" />
+      <InputWithLabel label="パスワード" />
       <Button colorScheme="blue" size="md" width="100%">
         続ける
       </Button>

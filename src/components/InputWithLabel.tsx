@@ -7,18 +7,18 @@ import {
 } from '@chakra-ui/react';
 
 interface Props extends InputProps {
-  title: string;
+  label: string;
 }
 
-function InputWithTitle(props: Props) {
-  const { title, ...inputProps } = props;
+function InputWithLabel(props: Props) {
+  const { label, ...inputProps } = props;
 
   return (
     <>
       <FormControl>
         <FormLabel>
           <Text fontSize="sm" as="b">
-            {title}
+            {label}
           </Text>
         </FormLabel>
         <Input type="email" size="md" width="100%" {...inputProps} />
@@ -27,4 +27,4 @@ function InputWithTitle(props: Props) {
   );
 }
 
-export default InputWithTitle;
+export default InputWithLabel;
