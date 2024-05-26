@@ -1,10 +1,18 @@
-import { FormControl, FormLabel, Input, Text } from '@chakra-ui/react';
+import {
+  FormControl,
+  FormLabel,
+  Input,
+  InputProps,
+  Text
+} from '@chakra-ui/react';
 
-interface TitleProps {
+interface Props extends InputProps {
   title: string;
 }
 
-function InputWithTitle({ title }: TitleProps) {
+function InputWithTitle(props: Props) {
+  const { title, ...inputProps } = props;
+
   return (
     <>
       <FormControl>
@@ -13,7 +21,7 @@ function InputWithTitle({ title }: TitleProps) {
             {title}
           </Text>
         </FormLabel>
-        <Input type="email" size="md" width="100%" />
+        <Input type="email" size="md" width="100%" {...inputProps} />
       </FormControl>
     </>
   );
