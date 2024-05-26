@@ -5,7 +5,7 @@ import { VStack, Button, Divider } from '@chakra-ui/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import GoogleGLogo from './GoogleGLogo';
-import InputWithTitle from './InputWithTitle';
+import InputWithLabel from './InputWithLabel';
 
 const SignInForm = () => {
   const router = useRouter();
@@ -24,8 +24,8 @@ const SignInForm = () => {
 
   return (
     <VStack spacing={4}>
-      <InputWithTitle title="メールアドレス" />
-      <InputWithTitle title="パスワード" />
+      <InputWithLabel label="メールアドレス" />
+      <InputWithLabel label="パスワード" />
       <Button colorScheme="blue" size="md" width="100%">
         続ける
       </Button>
