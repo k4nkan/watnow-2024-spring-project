@@ -21,8 +21,8 @@ export const Pending = (props: PendingProps) => {
         value={progressValue}
       />
       <HStack width="100%" justifyContent="space-between">
-        <Text>{props.current}人</Text>
-        <Text>あと {props.max - props.current}人</Text>
+        <Text><span className='font-bold'>{props.current}</span>人</Text>
+        <Text>あと <span className='font-bold'>{props.max - props.current}</span>人</Text>
       </HStack>
     </ForecastStatusLayout>
   );
