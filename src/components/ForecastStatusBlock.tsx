@@ -1,7 +1,7 @@
-import ProgressItem from './ForecastStatus';
+import ForecastStatus from './ForecastStatus';
 
-const ProgressBar = () => {
-  return <ProgressItem Status={false} Member={5} Now={1} />;
+const ForecastStatusBlock = () => {
+  return <ForecastStatus Status={false} Member={5} Now={1} />;
 };
 
-export default ProgressBar;
+export default ForecastStatusBlock;
