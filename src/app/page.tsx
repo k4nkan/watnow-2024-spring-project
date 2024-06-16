@@ -1,5 +1,5 @@
-import AlertBox from '@/components/AlertBox';
-import ForecastStatusBlock from '@/components/ForecastStatusBlock';
+import AlertContainer from '@/components/AlertContainer';
+import ForecastStatusContainer from '@/components/ForecastStatusContainer';
 import SignInForm from '@/components/SignInForm';
 import TabBar from '@/components/TabBar';
 
@@ -8,8 +8,8 @@ export default function Page() {
     <div>
       <SignInForm />
       <TabBar />
-      <ForecastStatusBlock />
-      <AlertBox />
+      <ForecastStatusContainer />
+      <AlertContainer />
     </div>
   );
 }

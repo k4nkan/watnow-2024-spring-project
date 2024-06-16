@@ -1,4 +1,4 @@
-import { Pending } from './forecast-status-block/Pending';
+import { Pending } from './forecast-status-block/PendingStatus';
 
 const ForecastStatusBlock = () => {
   return <Pending current={4} max={10} />;
