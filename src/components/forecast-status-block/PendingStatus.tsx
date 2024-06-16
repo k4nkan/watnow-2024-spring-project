@@ -15,7 +15,7 @@ export const Pending = (props: PendingProps) => {
       description={'連絡がまだの人がいます！'}
     >
       <Progress
-        colorScheme="yellow.300"
+        colorScheme="progress"
         borderRadius={'lg'}
         width="100%"
         value={progressValue}
