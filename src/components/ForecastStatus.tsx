@@ -6,7 +6,7 @@ interface BarProps {
   Now: number;
 }
 
-const ProgressItem = (props: BarProps) => {
+const ForecastStatus = (props: BarProps) => {
   const progressValue = (props.Now / props.Member) * 100;
   return (
     <Box width="100%" borderRadius="lg" bg="gray.50">
@@ -16,7 +16,7 @@ const ProgressItem = (props: BarProps) => {
         ) : (
           <>
             <Box borderRadius="2px" bg="gray.100">
-              <Text as='b' size={'sm'}>
+              <Text as="b" size={'sm'}>
                 未確定
               </Text>
             </Box>
@@ -28,7 +28,6 @@ const ProgressItem = (props: BarProps) => {
           borderRadius={'lg'}
           width="100%"
           value={progressValue}
-          
         />
         <HStack width="100%" justifyContent="space-between">
           <Text>{props.Now}人</Text>
@@ -39,4 +38,4 @@ const ProgressItem = (props: BarProps) => {
   );
 };
 
-export default ProgressItem;
+export default ForecastStatus;

@@ -1,5 +1,5 @@
 import AlertBox from '@/components/AlertBox';
-import ProgressBar from '@/components/ProgressBar';
+import ForecastStatusBlock from '@/components/ForecastStatusBlock';
 import SignInForm from '@/components/SignInForm';
 import TabBar from '@/components/TabBar';
 
@@ -8,7 +8,7 @@ export default function Page() {
     <div>
       <SignInForm />
       <TabBar />
-      <ProgressBar />
+      <ForecastStatusBlock />
       <AlertBox />
     </div>
   );
