@@ -1,7 +1,7 @@
-import ForecastStatus from './ForecastStatus';
+import { Pending } from './forecast-status-block/Pending';
 
 const ForecastStatusBlock = () => {
-  return <ForecastStatus Status={false} Member={5} Now={1} />;
+  return <Pending current={4} max={10} />;
 };
 
 export default ForecastStatusBlock;
