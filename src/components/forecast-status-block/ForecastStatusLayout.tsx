@@ -10,7 +10,7 @@ const ForecastStatusLayout = (
   props: PropsWithChildren<ForecastStatusProps>
 ) => {
   return (
-    <Box width="100%" borderRadius="lg" bg="gray.50">
+    <Box px={4} py={3} width="100%" borderRadius="lg" bg="gray.50">
       <VStack alignItems={'flex-start'}>
         <>
           <Box borderRadius="2px" bg="gray.100">
@@ -18,6 +18,7 @@ const ForecastStatusLayout = (
               {props.badgeText}
             </Text>
           </Box>
+          <Text>{props.description}</Text>
           {props.children}
         </>
       </VStack>
