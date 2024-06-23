@@ -13,6 +13,7 @@ export const Pending = (props: PendingProps) => {
     <ForecastStatusLayout
       badgeText="未確定"
       description={'連絡がまだの人がいます！'}
+      colorScheme="gray"
     >
       <Progress
         colorScheme="progress"
@@ -21,8 +22,12 @@ export const Pending = (props: PendingProps) => {
         value={progressValue}
       />
       <HStack width="100%" justifyContent="space-between">
-        <Text><span className='font-bold'>{props.current}</span>人</Text>
-        <Text>あと <span className='font-bold'>{props.max - props.current}</span>人</Text>
+        <Text>
+          <span className="font-bold">{props.current}</span>人
+        </Text>
+        <Text>
+          あと <span className="font-bold">{props.max - props.current}</span>人
+        </Text>
       </HStack>
     </ForecastStatusLayout>
   );
