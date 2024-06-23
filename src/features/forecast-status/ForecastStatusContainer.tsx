@@ -1,7 +1,7 @@
 import { Pending } from '@/features/forecast-status/PendingStatus';
 
-const ForecastStatusBlock = () => {
+const ForecastStatusContainer = () => {
   return <Pending current={4} max={10} />;
 };
 
-export default ForecastStatusBlock;
+export default ForecastStatusContainer;

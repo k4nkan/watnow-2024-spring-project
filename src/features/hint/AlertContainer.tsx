@@ -1,6 +1,6 @@
 import AlertItem from '@/features/hint/AlertItem';
 
-function AlertBox() {
+function AlertContainer() {
   return (
     <>
       <AlertItem
@@ -23,4 +23,4 @@ function AlertBox() {
   );
 }
 
-export default AlertBox;
+export default AlertContainer;
