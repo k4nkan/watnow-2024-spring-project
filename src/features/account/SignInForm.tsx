@@ -4,8 +4,8 @@ import { auth, googleAuthProvider } from '@/utils/firebase';
 import { VStack, Button, Divider } from '@chakra-ui/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
-import GoogleGLogo from './GoogleGLogo';
-import InputWithLabel from './InputWithLabel';
+import GoogleGLogo from '@/components/GoogleGLogo';
+import InputWithLabel from '@/components/InputWithLabel';
 
 const SignInForm = () => {
   const router = useRouter();

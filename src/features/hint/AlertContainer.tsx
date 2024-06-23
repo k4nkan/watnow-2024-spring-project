@@ -1,4 +1,4 @@
-import AlertItem from '@/components/AlertItem';
+import AlertItem from '@/features/hint/AlertItem';
 
 function AlertBox() {
   return (
