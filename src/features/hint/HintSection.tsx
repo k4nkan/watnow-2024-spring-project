@@ -1,16 +1,16 @@
-import AlertItem from '@/features/hint/components/AlertItem';
+import Hint from '@/features/hint/components/Hint';
 
-function AlertContainer() {
+function HintSection() {
   return (
     <>
-      <AlertItem
+      <Hint
         alertColorScheme={'warning'}
         titleText={'今日の連絡がまだです！'}
         descriptionText={'今夜、ごはんを家で食べたいのかを連絡しましょう！'}
         destination={'連絡'}
         buttonColorScheme={'orange'}
       />
-      <AlertItem
+      <Hint
         alertColorScheme={'info'}
         titleText={'曜日ごとの予定をしよう！'}
         descriptionText={
@@ -23,4 +23,4 @@ function AlertContainer() {
   );
 }
 
-export default AlertContainer;
+export default HintSection;

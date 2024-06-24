@@ -4,7 +4,7 @@ import PageTitle from '@/components/PageTitle';
 import TitleWithIcon from '@/components/TitleWithIcon';
 import { Lightbulb, Onigiri } from '@phosphor-icons/react';
 import ForecastStatusSection from '@/features/forecast-status/ForecastStatusSection';
-import AlertContainer from '@/features/hint/components/AlertContainer';
+import HintSection from '@/features/hint/HintSection';
 
 const Page = () => {
   return (
@@ -20,7 +20,7 @@ const Page = () => {
           text="ヒント"
           ion={<Lightbulb size={24} weight="bold" />}
         />
-        <AlertContainer />
+        <HintSection />
       </VStack>
     </>
   );
