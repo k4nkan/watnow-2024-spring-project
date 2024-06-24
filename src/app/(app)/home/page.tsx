@@ -4,7 +4,7 @@ import PageTitle from '@/components/PageTitle';
 import TitleWithIcon from '@/components/TitleWithIcon';
 import { Lightbulb, Onigiri } from '@phosphor-icons/react';
 import ForecastStatusSection from '@/features/forecast-status/components/ForecastStatusSection';
-import AlertContainer from '@/features/hint/AlertContainer';
+import AlertContainer from '@/features/hint/components/AlertContainer';
 
 const Page = () => {
   return (

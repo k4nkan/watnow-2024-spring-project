@@ -1,5 +1,5 @@
 import React from 'react';
-import ForecastStatusLayout from './ForecastStatusLayout';
+import ForecastStatusLayout from './components/ForecastStatusLayout';
 import { HStack, Progress, Text } from '@chakra-ui/react';
 
 interface PendingProps {
