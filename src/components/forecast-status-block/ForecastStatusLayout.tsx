@@ -1,7 +1,8 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, Text, VStack, theme } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
 
 interface ForecastStatusProps {
+  colorScheme?: keyof typeof theme.colors;
   badgeText: string;
   description: string;
 }
@@ -9,11 +10,15 @@ interface ForecastStatusProps {
 const ForecastStatusLayout = (
   props: PropsWithChildren<ForecastStatusProps>
 ) => {
+  const colorScheme = props.colorScheme || 'gray';
+  const bg50 = `${colorScheme}.50`;
+  const bg200 = `${colorScheme}.200`;
+
   return (
-    <Box px={4} py={3} width="100%" borderRadius="lg" bg="gray.50">
+    <Box px={4} py={3} width="100%" borderRadius="lg" bg={bg50}>
       <VStack alignItems={'flex-start'}>
         <>
-          <Box borderRadius="2px" bg="gray.100">
+          <Box borderRadius="2px" bg={bg200}>
             <Text as="b" size={'sm'}>
               {props.badgeText}
             </Text>
