@@ -1,6 +1,6 @@
 import TabBar from '@/components/TabBar';
 import { NavigationBar } from '@/features/navigation-bar/NavigationBar';
-import { Box, Container, Flex, VStack } from '@chakra-ui/react';
+import { Box, VStack } from '@chakra-ui/react';
 import { PropsWithChildren } from 'react';
 
 export default function AppLayout({ children }: PropsWithChildren) {
@@ -8,7 +8,9 @@ export default function AppLayout({ children }: PropsWithChildren) {
     <Box h={'100vh'} w={'100%'}>
       <VStack justify={'space-between'} h={'100%'} w={'100%'}>
         <NavigationBar />
-        {children}
+        <Box overflow={'auto'} h={'100%'} w={'100%'}>
+          {children}
+        </Box>
         <TabBar />
       </VStack>
     </Box>
