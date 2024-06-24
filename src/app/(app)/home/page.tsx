@@ -3,7 +3,7 @@ import { Stack, Text, VStack } from '@chakra-ui/react';
 import PageTitle from '@/components/PageTitle';
 import TitleWithIcon from '@/components/TitleWithIcon';
 import { Lightbulb, Onigiri } from '@phosphor-icons/react';
-import ForecastStatusContainer from '@/features/forecast-status/ForecastStatusContainer';
+import ForecastStatusSection from '@/features/forecast-status/components/ForecastStatusSection';
 import AlertContainer from '@/features/hint/AlertContainer';
 
 const Page = () => {
@@ -15,7 +15,7 @@ const Page = () => {
           text="今日のご飯予報"
           ion={<Onigiri size={24} weight="bold" />}
         />
-        <ForecastStatusContainer />
+        <ForecastStatusSection />
         <TitleWithIcon
           text="ヒント"
           ion={<Lightbulb size={24} weight="bold" />}
