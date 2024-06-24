@@ -25,7 +25,7 @@ interface alertProps {
   destination: string;
 }
 
-function AlertItem(props: alertProps) {
+function Hint(props: alertProps) {
   const [isVisible, setIsVisible] = useState(true);
 
   return (
@@ -59,4 +59,4 @@ function AlertItem(props: alertProps) {
   );
 }
 
-export default AlertItem;
+export default Hint;

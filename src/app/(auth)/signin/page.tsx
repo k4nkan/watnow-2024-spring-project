@@ -1,4 +1,4 @@
-import SignInForm from '@/components/SignInForm';
+import SignInForm from '@/features/account/SignInForm';
 
 function page() {
   return <SignInForm />;

@@ -7,9 +7,7 @@ interface ForecastStatusProps {
   description: string;
 }
 
-const ForecastStatusLayout = (
-  props: PropsWithChildren<ForecastStatusProps>
-) => {
+const Layout = (props: PropsWithChildren<ForecastStatusProps>) => {
   const colorScheme = props.colorScheme || 'gray';
   const bg50 = `${colorScheme}.50`;
   const bg200 = `${colorScheme}.200`;
@@ -31,4 +29,4 @@ const ForecastStatusLayout = (
   );
 };
 
-export default ForecastStatusLayout;
+export default Layout;

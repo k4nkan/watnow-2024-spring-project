@@ -1,5 +1,5 @@
 import React from 'react';
-import ForecastStatusLayout from './ForecastStatusLayout';
+import Layout from './Layout';
 import { HStack, Progress, Text } from '@chakra-ui/react';
 
 interface PendingProps {
@@ -10,7 +10,7 @@ interface PendingProps {
 export const Pending = (props: PendingProps) => {
   const progressValue = (props.current / props.max) * 100;
   return (
-    <ForecastStatusLayout
+    <Layout
       badgeText="未確定"
       description={'連絡がまだの人がいます！'}
       colorScheme="gray"
@@ -29,6 +29,6 @@ export const Pending = (props: PendingProps) => {
           あと <span className="font-bold">{props.max - props.current}</span>人
         </Text>
       </HStack>
-    </ForecastStatusLayout>
+    </Layout>
   );
 };
