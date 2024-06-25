@@ -9,7 +9,7 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 
 export default function AppLayout({ children }: PropsWithChildren) {
   const { currentUser, loading: loadingCurrentUser } = useCurrentUser();
-  const [viewAvailable, setViewAvailable] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -17,14 +17,14 @@ export default function AppLayout({ children }: PropsWithChildren) {
       if (currentUser === null) {
         router.replace('/signin');
       } else {
-        setViewAvailable(true);
+        setSignedIn(true);
       }
     }
   }, [loadingCurrentUser, currentUser, router]);
 
   return (
     <Box h={'100vh'} w={'100%'}>
-      {loadingCurrentUser || !viewAvailable ? (
+      {!signedIn ? (
         <Center h={'100%'} w={'100%'}>
           <Spinner />
         </Center>
