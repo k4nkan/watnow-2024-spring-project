@@ -1,7 +1,7 @@
 'use client';
 
 import { auth, googleAuthProvider } from '@/utils/firebase';
-import { VStack, Button, Divider } from '@chakra-ui/react';
+import { VStack, Button, Divider, Box } from '@chakra-ui/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import GoogleGLogo from '@/components/GoogleGLogo';
@@ -23,24 +23,26 @@ const SignInForm = () => {
   };
 
   return (
-    <VStack spacing={4}>
-      <InputWithLabel label="メールアドレス" />
-      <InputWithLabel label="パスワード" />
-      <Button colorScheme="blue" size="md" width="100%">
-        続ける
-      </Button>
-      <Divider />
-      <Button
-        leftIcon={<GoogleGLogo size={16} />}
-        colorScheme="gray"
-        variant="outline"
-        size="md"
-        width="100%"
-        onClick={handleSignInWithGoogle}
-      >
-        Googleでログイン
-      </Button>
-    </VStack>
+    <Box bg={"gray.50"} width={"100%"} p={5} borderRadius={12}>
+      <VStack spacing={4}>
+        <InputWithLabel label="メールアドレス" />
+        <InputWithLabel label="パスワード" />
+        <Button colorScheme="blue" size="md" width="100%">
+          続ける
+        </Button>
+        <Divider />
+        <Button
+          leftIcon={<GoogleGLogo size={16} />}
+          colorScheme="gray"
+          variant="outline"
+          size="md"
+          width="100%"
+          onClick={handleSignInWithGoogle}
+        >
+          Googleでログイン
+        </Button>
+      </VStack>
+    </Box>
   );
 };
 
