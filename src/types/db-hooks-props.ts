@@ -1,3 +1,3 @@
-export type DBHookProps = {
+export type DBHookProps = Partial<{
   realtime: boolean;
-};
+}>;
