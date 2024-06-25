@@ -3,7 +3,7 @@ import { RequestListItem } from './RequestListItem';
 
 export const SampleRequests = () => {
   return (
-    <VStack>
+    <VStack pt={2} px={2}>
       <RequestListItem
         text="最近食べてなかったのでスーパー激甘口麻婆豆腐たべたいです🥄"
         icon="https://bit.ly/sage-adebayo"
