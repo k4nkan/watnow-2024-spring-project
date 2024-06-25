@@ -1,4 +1,4 @@
-import { Avatar, HStack, Heading, Text } from '@chakra-ui/react';
+import { Avatar, HStack, Text } from '@chakra-ui/react';
 
 interface RequestListItemProps {
   text: string;
