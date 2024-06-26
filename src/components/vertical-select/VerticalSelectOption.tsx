@@ -2,7 +2,7 @@
 
 import { useContext, useEffect, useRef, useState } from 'react';
 import VerticalSelectContext from './hooks/use-vertical-select';
-import clsx from 'clsx';
+import clsx, { ClassValue } from 'clsx';
 
 export type VerticalSelectOptionProps = {
   value: string | number;
@@ -22,7 +22,7 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
     );
   }
 
-  const { selectedValue, setSelectedValue, options } = context;
+  const { selectedValue, setSelectedValue, options, itemHeight } = context;
 
   const handleClick = () => {
     setSelectedValue(props.value);
@@ -38,7 +38,7 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
       const index = options.findIndex((option) => option.value === props.value);
       options.splice(index, 1);
     };
-  });
+  }, [options, props]);
 
   useEffect(() => {
     setIsSelected(selectedValue === props.value);
@@ -46,12 +46,16 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
 
   return (
     <div
-      className={clsx('flex justify-between', isSelected && 'bg-gray-200')}
+      className={clsx(
+        'flex cursor-pointer items-center justify-between px-6',
+        isSelected && 'font-semibold'
+      )}
+      style={{ height: itemHeight }}
       onClick={handleClick}
       ref={ref}
     >
-      <div className={'flex items-center'}>
-        {props.leftIcon && <div className="mr-2">{props.leftIcon}</div>}
+      <div className={'flex items-center gap-3'}>
+        <div className="size-4">{props.leftIcon}</div>
         <div>{props.children}</div>
       </div>
       {props.subText && (
