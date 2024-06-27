@@ -7,7 +7,7 @@ import { VerticalSelectContextType } from './types/vertical-select-context-type'
 
 interface VerticalSelectProps {
   children: React.ReactNode;
-  defaultValue?: VerticalSelectOptionProps['value'];
+  value?: VerticalSelectOptionProps['value'];
   itemHeight?: number;
 }
 
@@ -15,7 +15,7 @@ type VerticalSelectValue = VerticalSelectOptionProps['value'] | null;
 
 export const VerticalSelect = ({
   children,
-  defaultValue,
+  value: defaultValue,
   itemHeight = 48
 }: VerticalSelectProps) => {
   const [selectedValue, setSelectedValue] = useState<VerticalSelectValue>(null);
@@ -23,6 +23,7 @@ export const VerticalSelect = ({
   const [isOptionsReady, setIsOptionsReady] = useState<boolean>(false);
   const Provider = VerticalSelectContext.Provider;
   const options = useRef<VerticalSelectContextType['options']>([]);
+  const itemCount = Children.count(children);
 
   useEffect(() => {
     if (defaultValue) {
@@ -85,15 +86,27 @@ export const VerticalSelect = ({
       <div className={'relative flex flex-col rounded-md bg-slate-100'}>
         <div
           className={
-            'absolute z-0 w-full rounded-md border-2 border-slate-400 bg-white shadow-md transition-all'
+            'absolute z-0 rounded-md border-2 border-slate-400 bg-white shadow-md transition-all'
           }
           style={{
-            transform: `translateY(${selectedIndex * itemHeight}px) `,
-            height: itemHeight
+            transform: `translateY(${selectedIndex * itemHeight - 2}px) translateX(-3px)`,
+            width: 'calc(100% + 6px)',
+            height: `${itemHeight + 4}px`
           }}
         />
+        {Array(itemCount - 1).map((_, index) => (
+          <Divider key={index} />
+        ))}
         <div className="z-20">{children}</div>
       </div>
     </Provider>
+  );
+};
+
+const Divider = () => {
+  return (
+    <div className="absolute w-full">
+      <div className="mx-5 rounded-full border-t-2 border-slate-300" />
+    </div>
   );
 };

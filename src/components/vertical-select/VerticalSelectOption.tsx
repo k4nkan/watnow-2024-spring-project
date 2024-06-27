@@ -49,24 +49,31 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
   return (
     <div
       className={clsx(
-        'flex cursor-pointer items-center justify-between px-6',
-        isSelected && 'font-semibold'
+        'group flex cursor-pointer items-center p-1.5 text-slate-700',
+        isSelected && 'font-semibold text-slate-950'
       )}
-      style={{ height: itemHeight }}
       ref={ref}
+      style={{ height: itemHeight }}
       {...clickOrTap(handleClick)}
     >
-      <div className={'flex items-center gap-3'}>
-        <div className="size-4">
-          {props.selectedLeftIcon && isSelected
-            ? props.selectedLeftIcon
-            : props.leftIcon}
+      <div
+        className={clsx(
+          'flex size-full items-center justify-between rounded px-4 transition-colors duration-150',
+          !isSelected && 'group-hover:bg-slate-400/10'
+        )}
+      >
+        <div className={'flex items-center gap-3'}>
+          <div className="size-4">
+            {props.selectedLeftIcon && isSelected
+              ? props.selectedLeftIcon
+              : props.leftIcon}
+          </div>
+          <div>{props.children}</div>
         </div>
-        <div>{props.children}</div>
+        {props.subText && (
+          <div className="text-sm text-gray-400">{props.subText}</div>
+        )}
       </div>
-      {props.subText && (
-        <div className="text-sm text-gray-400">{props.subText}</div>
-      )}
     </div>
   );
 };
