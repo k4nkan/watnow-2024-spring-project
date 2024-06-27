@@ -2,11 +2,12 @@
 
 import { useContext, useEffect, useRef, useState } from 'react';
 import VerticalSelectContext from './hooks/use-vertical-select';
-import clsx, { ClassValue } from 'clsx';
+import clsx from 'clsx';
 
 export type VerticalSelectOptionProps = {
   value: string | number;
   leftIcon?: React.ReactNode;
+  selectedLeftIcon?: React.ReactNode;
   children: React.ReactNode;
   subText?: string;
 };
@@ -55,7 +56,11 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
       ref={ref}
     >
       <div className={'flex items-center gap-3'}>
-        <div className="size-4">{props.leftIcon}</div>
+        <div className="size-4">
+          {props.selectedLeftIcon && isSelected
+            ? props.selectedLeftIcon
+            : props.leftIcon}
+        </div>
         <div>{props.children}</div>
       </div>
       {props.subText && (
