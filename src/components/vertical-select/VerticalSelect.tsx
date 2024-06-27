@@ -20,6 +20,7 @@ export const VerticalSelect = ({
 }: VerticalSelectProps) => {
   const [selectedValue, setSelectedValue] = useState<VerticalSelectValue>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
+  const [isOptionsReady, setIsOptionsReady] = useState<boolean>(false);
   const Provider = VerticalSelectContext.Provider;
   const options = useRef<VerticalSelectContextType['options']>([]);
 
@@ -29,21 +30,46 @@ export const VerticalSelect = ({
     }
   }, [defaultValue]);
 
+  useEffect(() => {
+    if (isOptionsReady) {
+      if (!options.current.find((option) => option.value === defaultValue)) {
+        console.error(`Invalid defaultValue: ${defaultValue}`);
+      }
+      if (defaultValue) {
+        setSelectedIndex(
+          options.current.find((option) => option.value === defaultValue)
+            ?.index || 0
+        );
+      } else {
+        setSelectedIndex(0);
+      }
+    }
+  }, [isOptionsReady, defaultValue]);
+
   // 渡ってきたchildrenをmapで回して、それぞれのoptionにindexを設定する
   useEffect(() => {
     Children.forEach(children, (child, index) => {
       child = child as ReactElement<VerticalSelectOptionProps>;
       if (child) {
-        options.current.map((option) => {
-          option.index = index;
+        options.current.forEach((option) => {
+          if (option.value === child.props.value) option.index = index;
         });
       }
+
+      // 全てのoptionにindexが設定された時の処理
+      if (
+        Children.count(children) ===
+        options.current.filter((option) => option.index !== undefined).length
+      ) {
+        setIsOptionsReady(true);
+      }
     });
-  }, [children]);
+  }, [children, defaultValue]);
 
   useEffect(() => {
     setSelectedIndex(
-      options.current.findIndex((option) => option.value === selectedValue)
+      options.current.find((option) => option.value === selectedValue)?.index ||
+        0
     );
   }, [selectedValue]);
 

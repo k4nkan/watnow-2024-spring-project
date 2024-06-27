@@ -30,7 +30,7 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
 
   useEffect(() => {
     if (options.some((option) => option.value === props.value)) {
-      throw new Error(`Duplicate value: ${props.value}`);
+      console.error(`Duplicate value: ${props.value}`);
     } else {
       options.push({ ...props, ref: ref.current });
     }
