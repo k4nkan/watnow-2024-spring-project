@@ -3,6 +3,7 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import VerticalSelectContext from './hooks/use-vertical-select';
 import clsx from 'clsx';
+import clickOrTap from './utils/clickOrTap';
 
 export type VerticalSelectOptionProps = {
   value: string | number;
@@ -52,8 +53,8 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
         isSelected && 'font-semibold'
       )}
       style={{ height: itemHeight }}
-      onClick={handleClick}
       ref={ref}
+      {...clickOrTap(handleClick)}
     >
       <div className={'flex items-center gap-3'}>
         <div className="size-4">
