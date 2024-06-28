@@ -14,8 +14,12 @@ export default function AppLayout({ children }: PropsWithChildren) {
   const [viewAvailable, setViewAvailable] = useState(false);
   const router = useRouter();
 
-  const { handleScroll, callbackRefToObserve, setObserverMeasureTarget } =
+  const { setAvailablePages, handleScroll, registerResizeObserver } =
     useScrollButton();
+
+  useEffect(() => {
+    setAvailablePages(['/home']);
+  }, [setAvailablePages]);
 
   useEffect(() => {
     if (!loadingCurrentUser) {
@@ -42,14 +46,13 @@ export default function AppLayout({ children }: PropsWithChildren) {
             w={'100%'}
             onScroll={handleScroll}
             ref={(element) => {
-              setObserverMeasureTarget(element);
-              callbackRefToObserve(element);
+              registerResizeObserver(element, 'outer');
             }}
             zIndex={0}
           >
             <div
               ref={(element) => {
-                callbackRefToObserve(element);
+                registerResizeObserver(element, 'inner');
               }}
             >
               {children}

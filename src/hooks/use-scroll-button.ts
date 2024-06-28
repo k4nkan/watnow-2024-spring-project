@@ -1,26 +1,26 @@
-import {
-  UIEventHandler,
-  useCallback,
-  useEffect,
-  useRef,
-  useState
-} from 'react';
+import { UIEventHandler, useCallback, useEffect, useState } from 'react';
 
 import * as atom from '@/states/scroll-button';
 import { useAtom } from 'jotai';
+import { usePathname } from 'next/navigation';
 
 export const useScrollButton = () => {
   const [availablePages, setAvailablePages] = useAtom(atom.availablePages);
   const [show, setShow] = useAtom(atom.show);
+  const [disabled, setDisabled] = useState(false);
   const [isTop, setIsTop] = useAtom(atom.isTop);
   const [isScrollable, setIsScrollable] = useAtom(atom.isScrollable);
-  const resizeObservers = atom.refs.resizeObservers;
-  const refs = atom.refs;
-  const [scrollTo, setScrollTo] = useAtom(atom.scrollTo);
+  const observers = atom.observers;
+  const [scrollTarget, setScrollTarget] = useAtom(atom.scrollTo);
+  const pathname = usePathname();
 
   useEffect(() => {
-    console.log(`isTop: ${isTop} isScrollable: ${isScrollable}`);
-  }, [isTop, isScrollable]);
+    if (availablePages.some((page) => pathname.startsWith(page))) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [availablePages, pathname]);
 
   const handleScroll: UIEventHandler = useCallback(
     (uiEvent) => {
@@ -36,44 +36,19 @@ export const useScrollButton = () => {
     [setIsTop]
   );
 
-  const registerResizeObserver = useCallback(() => {
-    const target = refs.observerMeasureTarget;
-    if (!target) {
-      console.log('observerMeasureTarget is not set');
-      return;
-    }
-    const resizeObserver = new ResizeObserver((entries) => {
-      setIsScrollable(target.scrollHeight > target.clientHeight);
-    });
-    resizeObserver.observe(target);
-    resizeObservers.push(resizeObserver);
-  }, [refs.observerMeasureTarget, resizeObservers, setIsScrollable]);
-
-  const disconnectAllResizeObservers = useCallback(() => {
-    console.log('disconnecting all resize observers...');
-    resizeObservers.forEach((resizeObserver) => {
-      resizeObserver.disconnect();
-    });
-  }, [resizeObservers]);
-
-  const callbackRefToObserve = useCallback(
-    (element: HTMLDivElement | null) => {
-      if (element) {
-        console.log('registering resize observer...', element);
-        registerResizeObserver();
+  const registerResizeObserver = useCallback(
+    (target: HTMLElement | null, type: 'inner' | 'outer') => {
+      if (target) {
+        const resizeObserver = new ResizeObserver((e) => {
+          setIsScrollable(target.scrollHeight > target.clientHeight);
+        });
+        resizeObserver.observe(target);
+        observers.push(resizeObserver);
       } else {
-        disconnectAllResizeObservers();
+        observers.forEach((observer) => observer.disconnect());
       }
     },
-    [disconnectAllResizeObservers, registerResizeObserver]
-  );
-
-  const setObserverMeasureTarget = useCallback(
-    (element: HTMLDivElement | null) => {
-      console.log('setting observer measure target...', element);
-      refs.observerMeasureTarget = element;
-    },
-    [refs]
+    [observers, setIsScrollable]
   );
 
   useEffect(() => {
@@ -88,10 +63,10 @@ export const useScrollButton = () => {
     show,
     isTop,
     isScrollable,
-    setScrollTo,
+    setScrollTo: setScrollTarget,
     setAvailablePages,
-    setObserverMeasureTarget,
     handleScroll,
-    callbackRefToObserve
+    registerResizeObserver,
+    disabled
   };
 };
