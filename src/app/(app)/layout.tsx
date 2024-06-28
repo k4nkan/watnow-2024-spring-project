@@ -70,11 +70,12 @@ export default function AppLayout({ children }: PropsWithChildren) {
             w={'100%'}
             onScroll={(e) => handleScroll(e)}
             ref={handleAppearScrollableAppContainer}
+            zIndex={0}
           >
             <div ref={handleAppearScrollableAppContainer}>{children}</div>
           </Box>
-          {isScrollable && isTop ? <PageDownButton /> : <></>}
-          <TabBar />
+          <PageDownButton zIndex={10} show={isTop && isScrollable} />
+          <TabBar zIndex={20} />
         </VStack>
       )}
     </Box>

@@ -5,6 +5,7 @@ import { HStack } from '@chakra-ui/react';
 
 interface Props {
   height?: string;
+  zIndex?: number;
 }
 
 const TabBar = (props: Props) => {
@@ -17,6 +18,8 @@ const TabBar = (props: Props) => {
         h={height}
         borderTopWidth={1}
         borderColor={'gray.50'}
+        zIndex={props.zIndex ?? 1}
+        bg={'white'}
       >
         <TabItem
           title="ホーム"
