@@ -71,7 +71,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
             onScroll={(e) => handleScroll(e)}
             ref={handleAppearScrollableAppContainer}
           >
-            {children}
+            <div ref={handleAppearScrollableAppContainer}>{children}</div>
           </Box>
           {isScrollable && isTop ? <PageDownButton /> : <></>}
           <TabBar />
