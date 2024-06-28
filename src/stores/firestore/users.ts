@@ -3,7 +3,6 @@ import { DBUser } from '@/types/db-user';
 import {
   DocumentSnapshot,
   Timestamp,
-  addDoc,
   collection,
   doc,
   getDoc,
@@ -13,6 +12,8 @@ import {
 } from 'firebase/firestore';
 
 export const dbUsersCollectionName = 'users';
+
+export const usersRef = collection(db, dbUsersCollectionName);
 
 type Data = Omit<DBUser, 'uid'>;
 
