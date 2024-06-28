@@ -1,14 +1,6 @@
 import Copyright from '@/components/Copyright';
 import SignInForm from '@/features/account/SignInForm';
-import {
-  Center,
-  Heading,
-  Text,
-  VStack,
-  Image,
-  Box,
-  Spacer
-} from '@chakra-ui/react';
+import { Heading, VStack, Image, Box, Spacer } from '@chakra-ui/react';
 
 function page() {
   return (
@@ -26,7 +18,9 @@ function page() {
             <br />
             さようなら👋
           </Heading>
-          <SignInForm />
+          <Box bg={'gray.50'} width={'100%'} p={5} borderRadius={12}>
+            <SignInForm />
+          </Box>
         </VStack>
         <Spacer />
         <Copyright />

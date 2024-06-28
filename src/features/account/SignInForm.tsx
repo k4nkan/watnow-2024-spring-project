@@ -23,26 +23,24 @@ const SignInForm = () => {
   };
 
   return (
-    <Box bg={"gray.50"} width={"100%"} p={5} borderRadius={12}>
-      <VStack spacing={4}>
-        <InputWithLabel label="メールアドレス" />
-        <InputWithLabel label="パスワード" />
-        <Button colorScheme="blue" size="md" width="100%">
-          続ける
-        </Button>
-        <Divider />
-        <Button
-          leftIcon={<GoogleGLogo size={16} />}
-          colorScheme="gray"
-          variant="outline"
-          size="md"
-          width="100%"
-          onClick={handleSignInWithGoogle}
-        >
-          Googleでログイン
-        </Button>
-      </VStack>
-    </Box>
+    <VStack spacing={4}>
+      <InputWithLabel label="メールアドレス" />
+      <InputWithLabel label="パスワード" />
+      <Button colorScheme="blue" size="md" width="100%">
+        続ける
+      </Button>
+      <Divider />
+      <Button
+        leftIcon={<GoogleGLogo size={16} />}
+        colorScheme="gray"
+        variant="outline"
+        size="md"
+        width="100%"
+        onClick={handleSignInWithGoogle}
+      >
+        Googleでログイン
+      </Button>
+    </VStack>
   );
 };
 
