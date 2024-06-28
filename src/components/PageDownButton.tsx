@@ -21,7 +21,12 @@ const PageDownButton = (props: PageDownButtonProps) => {
         transform={`translate(-50%, calc(-50% + ${show ? '0px' : '100px'}))`}
         zIndex={props.zIndex}
       >
-        <Circle size={'40px'} bg={'black'} onClick={props.onClick}>
+        <Circle
+          size={'40px'}
+          bg={'black'}
+          onClick={props.onClick}
+          className="shadow-md"
+        >
           <ArrowDown size={'25px'} color="white" />
         </Circle>
       </Box>
