@@ -58,7 +58,7 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
       )}
       ref={ref}
       style={{ height: itemHeight }}
-      {...clickOrTap(handleClick)}
+      onClick={handleClick}
     >
       <div
         className={clsx(
