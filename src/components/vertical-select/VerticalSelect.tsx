@@ -86,7 +86,7 @@ export const VerticalSelect = ({
       <div className={'relative flex flex-col rounded-md bg-slate-100'}>
         <div
           className={
-            'absolute z-0 rounded-md border-2 border-slate-400 bg-white shadow-md transition-all'
+            'absolute z-10 rounded-md border-2 border-slate-400 bg-white shadow-md transition-all'
           }
           style={{
             transform: `translateY(${selectedIndex * itemHeight - 2}px) translateX(-3px)`,
@@ -94,19 +94,26 @@ export const VerticalSelect = ({
             height: `${itemHeight + 4}px`
           }}
         />
-        {Array(itemCount - 1).map((_, index) => (
-          <Divider key={index} />
-        ))}
+        <div className="z-0">
+          {[...Array(itemCount - 1)].map((_, index) => {
+            return <Divider key={index} posY={(index + 1) * itemHeight} />;
+          })}
+        </div>
         <div className="z-20">{children}</div>
       </div>
     </Provider>
   );
 };
 
-const Divider = () => {
+const Divider = ({ posY }: { posY: number }) => {
   return (
     <div className="absolute w-full">
-      <div className="mx-5 rounded-full border-t-2 border-slate-300" />
+      <div
+        className="mx-5 rounded-full border-t-2 border-slate-200"
+        style={{
+          transform: `translateY(${posY - 1}px)`
+        }}
+      />
     </div>
   );
 };
