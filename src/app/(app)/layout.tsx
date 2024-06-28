@@ -22,8 +22,6 @@ export default function AppLayout({ children }: PropsWithChildren) {
   const [isScrollable, setIsScrollable] = useState(false);
   const resizeObserver = useRef<ResizeObserver | null>(null);
 
-  console.log('Rendered!', isTop);
-
   const handleScroll: UIEventHandler = (uiEvent) => {
     if (uiEvent.target instanceof HTMLElement) {
       if (uiEvent.target.scrollTop !== 0) {
@@ -39,7 +37,6 @@ export default function AppLayout({ children }: PropsWithChildren) {
   ) => {
     if (element) {
       resizeObserver.current = new ResizeObserver(() => {
-        console.log('resized!');
         setIsScrollable(element.scrollHeight > element.clientHeight);
       });
       resizeObserver.current.observe(element);
