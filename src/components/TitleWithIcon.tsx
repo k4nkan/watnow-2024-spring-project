@@ -1,20 +1,22 @@
-import { Box, Center, HStack, Heading } from '@chakra-ui/react';
-import { ReactElement } from 'react';
+import { Box, ButtonProps, Center, HStack, Heading } from '@chakra-ui/react';
+import { ReactElement, forwardRef } from 'react';
 
 interface Props {
   text: string;
   ion: ReactElement;
 }
 
-const TitleWithIcon = (Props: Props) => {
+const TitleWithIcon = forwardRef<HTMLDivElement, Props>((props, ref) => {
   return (
-    <HStack mt={3} w={'100%'} justifyContent={'start'}>
+    <HStack ref={ref} mt={3} w={'100%'} justifyContent={'start'}>
       <Center h={8} w={8}>
-        {Props.ion}
+        {props.ion}
       </Center>
-      <Heading size={'md'}>{Props.text}</Heading>
+      <Heading size={'md'}>{props.text}</Heading>
     </HStack>
   );
-};
+});
+
+TitleWithIcon.displayName = 'TitleWithIcon';
 
 export default TitleWithIcon;
