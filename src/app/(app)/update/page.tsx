@@ -1,43 +1,18 @@
 'use client';
 
-import { VerticalSelect } from '@/components/vertical-select/VerticalSelect';
-import { Cookie, Onigiri, BowlFood } from '@phosphor-icons/react';
-import { VerticalSelectOption as Option } from '@/components/vertical-select/VerticalSelectOption';
+import PageTitle from '@/components/PageTitle';
+import { UpdateForm } from '@/features/update-form/UpdateForm';
+import { Text, VStack } from '@chakra-ui/react';
 
 const Page = () => {
   return (
-    <div className="m-10">
-      <VerticalSelect
-        value={'less'}
-        itemHeight={56}
-        onChange={(e) => console.log(e)}
-      >
-        <Option
-          value={'less'}
-          leftIcon={<Cookie />}
-          selectedLeftIcon={<Cookie weight="bold" />}
-          subText={'1杯'}
-        >
-          少なめに
-        </Option>
-        <Option
-          value={'normal'}
-          leftIcon={<Onigiri />}
-          selectedLeftIcon={<Onigiri weight="bold" />}
-          subText={'1.5杯'}
-        >
-          普段通り
-        </Option>
-        <Option
-          value={'more'}
-          leftIcon={<BowlFood />}
-          selectedLeftIcon={<BowlFood weight="bold" />}
-          subText={'2杯'}
-        >
-          たくさん
-        </Option>
-      </VerticalSelect>
-    </div>
+    <VStack w={'100%'} px={6} py={2.5}>
+      <PageTitle titleText="連絡" />
+      <Text>
+        今日の晩御飯はどれくらい食べる予定ですか？量や献立の希望を編集しましょう！
+      </Text>
+      <UpdateForm />
+    </VStack>
   );
 };
 
