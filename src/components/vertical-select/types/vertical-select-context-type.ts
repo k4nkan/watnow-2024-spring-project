@@ -9,4 +9,5 @@ export interface VerticalSelectContextType {
     index?: number;
   })[];
   itemHeight: number;
+  onChange?: (value: VerticalSelectOptionProps['value']) => void;
 }
