@@ -1,12 +1,23 @@
 'use client';
-import { Stack, Text, VStack } from '@chakra-ui/react';
+import { VStack } from '@chakra-ui/react';
 import PageTitle from '@/components/PageTitle';
 import TitleWithIcon from '@/components/TitleWithIcon';
 import { Lightbulb, Onigiri } from '@phosphor-icons/react';
 import ForecastStatusSection from '@/features/forecast-status/ForecastStatusSection';
 import HintSection from '@/features/hint/HintSection';
+import { useScrollButton } from '@/hooks/use-scroll-button';
+import { useEffect, useRef } from 'react';
 
 const Page = () => {
+  const { setScrollTarget } = useScrollButton();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      setScrollTarget(scrollRef.current);
+    }
+  }, [setScrollTarget]);
+
   return (
     <>
       <VStack w={'100%'} px={6} py={2.5}>
@@ -17,6 +28,7 @@ const Page = () => {
         />
         <ForecastStatusSection />
         <TitleWithIcon
+          ref={scrollRef}
           text="ヒント"
           ion={<Lightbulb size={24} weight="bold" />}
         />

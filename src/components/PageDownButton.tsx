@@ -1,11 +1,11 @@
 import { useScrollButton } from '@/hooks/use-scroll-button';
 import { Box, BoxProps, Circle } from '@chakra-ui/react';
 import { ArrowDown } from '@phosphor-icons/react';
-import { usePathname } from 'next/navigation';
-import { MouseEventHandler, use } from 'react';
+import { MouseEventHandler } from 'react';
 
-interface PageDownButtonProps extends BoxProps {
+interface PageDownButtonProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
+  zIndex?: number;
 }
 
 const PageDownButton = (props: PageDownButtonProps) => {
@@ -18,8 +18,8 @@ const PageDownButton = (props: PageDownButtonProps) => {
         bottom={'80px'}
         left="50%"
         transition={'all 0.2s cubic-bezier(0.62, 0, 0.09, 0.99) '}
-        transform={`translate(-50%, calc(-50% + ${show ? '0px' : '80px'}))`}
-        {...props}
+        transform={`translate(-50%, calc(-50% + ${show ? '0px' : '100px'}))`}
+        zIndex={props.zIndex}
       >
         <Circle size={'40px'} bg={'black'} onClick={props.onClick}>
           <ArrowDown size={'25px'} color="white" />

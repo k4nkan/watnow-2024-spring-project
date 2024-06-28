@@ -11,7 +11,7 @@ export const useScrollButton = () => {
   const [isTop, setIsTop] = useAtom(atom.isTop);
   const [isScrollable, setIsScrollable] = useAtom(atom.isScrollable);
   const observers = atom.observers;
-  const [scrollTarget, setScrollTarget] = useAtom(atom.scrollTo);
+  const [scrollTarget, setScrollTarget] = useAtom(atom.scrollTarget);
   const pathname = usePathname();
 
   useEffect(() => {
@@ -25,8 +25,7 @@ export const useScrollButton = () => {
   const handleScroll: UIEventHandler = useCallback(
     (uiEvent) => {
       if (uiEvent.target instanceof HTMLElement) {
-        console.log('scrolling...');
-        if (uiEvent.target.scrollTop !== 0) {
+        if (uiEvent.target.scrollTop >= 100) {
           setIsTop(false);
         } else {
           setIsTop(true);
@@ -63,7 +62,8 @@ export const useScrollButton = () => {
     show,
     isTop,
     isScrollable,
-    setScrollTo: setScrollTarget,
+    setScrollTarget,
+    scrollTarget,
     setAvailablePages,
     handleScroll,
     registerResizeObserver,
