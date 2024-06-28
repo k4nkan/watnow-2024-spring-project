@@ -11,7 +11,7 @@ import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 export default function AppLayout({ children }: PropsWithChildren) {
   const { currentUser, loading: loadingCurrentUser } = useCurrentUser();
-  const [viewAvailable, setViewAvailable] = useState(false);
+  const [signedIn, setSignedIn] = useState(false);
   const router = useRouter();
 
   const {
@@ -30,7 +30,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
       if (currentUser === null) {
         router.replace('/signin');
       } else {
-        setViewAvailable(true);
+        setSignedIn(true);
       }
     }
   }, [loadingCurrentUser, currentUser, router]);
@@ -43,7 +43,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
 
   return (
     <Box h={'100svh'} w={'100%'}>
-      {loadingCurrentUser || !viewAvailable ? (
+      {!signedIn ? (
         <Center h={'100%'} w={'100%'}>
           <Spinner />
         </Center>
