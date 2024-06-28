@@ -1,7 +1,7 @@
 'use client';
 
 import { auth, googleAuthProvider } from '@/utils/firebase';
-import { VStack, Button, Divider } from '@chakra-ui/react';
+import { VStack, Button, Divider, Box } from '@chakra-ui/react';
 import { signInWithPopup } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import GoogleGLogo from '@/components/GoogleGLogo';
