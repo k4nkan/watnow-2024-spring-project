@@ -24,10 +24,14 @@ export const VerticalSelectOption = (props: VerticalSelectOptionProps) => {
     );
   }
 
-  const { selectedValue, setSelectedValue, options, itemHeight } = context;
+  const { selectedValue, setSelectedValue, options, itemHeight, onChange } =
+    context;
 
   const handleClick = () => {
     setSelectedValue(props.value);
+    if (onChange) {
+      onChange(props.value);
+    }
   };
 
   useEffect(() => {

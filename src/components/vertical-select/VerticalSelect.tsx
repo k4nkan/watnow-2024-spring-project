@@ -9,6 +9,7 @@ interface VerticalSelectProps {
   children: React.ReactNode;
   value?: VerticalSelectOptionProps['value'];
   itemHeight?: number;
+  onChange?: (value: VerticalSelectOptionProps['value']) => void;
 }
 
 type VerticalSelectValue = VerticalSelectOptionProps['value'] | null;
@@ -16,7 +17,8 @@ type VerticalSelectValue = VerticalSelectOptionProps['value'] | null;
 export const VerticalSelect = ({
   children,
   value: defaultValue,
-  itemHeight = 48
+  itemHeight = 48,
+  onChange
 }: VerticalSelectProps) => {
   const [selectedValue, setSelectedValue] = useState<VerticalSelectValue>(null);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
@@ -80,7 +82,8 @@ export const VerticalSelect = ({
         selectedValue,
         setSelectedValue,
         options: options.current,
-        itemHeight: itemHeight
+        itemHeight: itemHeight,
+        onChange: onChange
       }}
     >
       <div className={'relative flex flex-col rounded-md bg-slate-100'}>
