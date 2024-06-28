@@ -56,7 +56,7 @@ export default function AppLayout({ children }: PropsWithChildren) {
   }, [loadingCurrentUser, currentUser, router]);
 
   return (
-    <Box h={'100vh'} w={'100%'}>
+    <Box h={'100svh'} w={'100%'}>
       {loadingCurrentUser || !viewAvailable ? (
         <Center h={'100%'} w={'100%'}>
           <Spinner />
