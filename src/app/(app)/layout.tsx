@@ -3,6 +3,7 @@
 import PageDownButton from '@/components/PageDownButton';
 import TabBar from '@/components/TabBar';
 import { NavigationBar } from '@/features/navigation-bar/NavigationBar';
+import useCurrentGroup from '@/hooks/use-current-group';
 import { useCurrentUser } from '@/hooks/use-current-user';
 import { useScrollButton } from '@/hooks/use-scroll-button';
 import { Box, Center, Spinner, VStack } from '@chakra-ui/react';
@@ -13,6 +14,15 @@ export default function AppLayout({ children }: PropsWithChildren) {
   const { currentUser, loading: loadingCurrentUser } = useCurrentUser();
   const [signedIn, setSignedIn] = useState(false);
   const router = useRouter();
+
+  // ページを更新したらとりあえず lBbYQHxvVjITTZdTUT7H を表示（別に参加はしてない）
+  const { currentGroup, changeGroup } = useCurrentGroup();
+  useEffect(() => {
+    console.log(currentGroup);
+    if (currentGroup === null) {
+      changeGroup('lBbYQHxvVjITTZdTUT7H');
+    }
+  }, [currentGroup, changeGroup]);
 
   const {
     setAvailablePages,
