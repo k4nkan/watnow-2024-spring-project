@@ -1,8 +1,9 @@
 import Hint from '@/features/hint/components/Hint';
+import { VStack } from '@chakra-ui/react';
 
 function HintSection() {
   return (
-    <>
+    <VStack gap={4}>
       <Hint
         alertColorScheme={'warning'}
         titleText={'今日の連絡がまだです！'}
@@ -19,7 +20,7 @@ function HintSection() {
         destination={'設定'}
         buttonColorScheme={'blue'}
       />
-    </>
+    </VStack>
   );
 }
 
