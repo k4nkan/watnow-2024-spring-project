@@ -8,27 +8,79 @@ import {
   CheckCircle
 } from '@phosphor-icons/react';
 import { VerticalSelectOption as Option } from '@/components/vertical-select/VerticalSelectOption';
-import { useCallback, useEffect, useState } from 'react';
-import { Button, VStack } from '@chakra-ui/react';
+import { MouseEventHandler, useCallback, useEffect, useState } from 'react';
+import { Box, Button, Spinner, VStack } from '@chakra-ui/react';
 import { SectionHeader } from './components/SectionHeader';
 import { Section } from './components/Section';
+import useMyDinnerRequest, {
+  updateRequestProps
+} from '@/hooks/use-my-dinner-request';
+import clsx from 'clsx';
+
+// TODO: この値はユーザー設定から取得する
+const presets = {
+  none: 0,
+  less: 1,
+  normal: 1.5,
+  more: 2
+};
 
 export const UpdateForm = () => {
-  const [selectedValue, setSelectedValue] = useState<string>('normal');
-  const [beforeValue, setBeforeValue] = useState<string>('normal');
+  const {
+    dinnerRequest,
+    exists: isTodaysRequestExists,
+    updateRequest
+  } = useMyDinnerRequest();
+  const [selectedValue, setSelectedValue] = useState<string>('loading');
+  const [currentValue, setCurrentValue] = useState<string>('loading');
   const [isChanged, setIsChanged] = useState<boolean>(false);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
-  const handleChange = useCallback((value: string | number) => {
-    setSelectedValue(value as string);
-  }, []);
+  const isLoading = dinnerRequest === 'loading';
 
   useEffect(() => {
-    setIsChanged(selectedValue !== beforeValue);
-  }, [selectedValue, beforeValue]);
+    if (isLoading) return;
+    if (dinnerRequest === null) {
+      setSelectedValue('normal');
+    } else {
+      setCurrentValue(dinnerRequest.choice);
+      setSelectedValue(dinnerRequest.choice);
+    }
+  }, [dinnerRequest, isLoading]);
+
+  const handleChange = useCallback(
+    (value: string | number) => {
+      setSelectedValue(value as string);
+    },
+    [setSelectedValue]
+  );
+
+  const handleSubmit: MouseEventHandler = useCallback(() => {
+    const value = selectedValue;
+    const requestData: updateRequestProps = {
+      choice: value as updateRequestProps['choice'],
+      portions: presets[value as keyof typeof presets],
+      additionalRequests: ''
+    };
+    updateRequest(requestData);
+  }, [selectedValue, updateRequest]);
+
+  useEffect(() => {
+    setIsChanged(selectedValue !== currentValue);
+  }, [selectedValue, currentValue]);
 
   return (
     <VStack w={'100%'} gap={4}>
-      <VStack w={'100%'} p={4} bg={'gray.50'} gap={9}>
+      <VStack
+        w={'100%'}
+        p={4}
+        bg={'gray.50'}
+        rounded={'8px'}
+        className={clsx(
+          ' flex w-full flex-col gap-9 transition-opacity',
+          isLoading ?? 'opacity-10'
+        )}
+      >
         <Section>
           <SectionHeader>食べません...</SectionHeader>
           <VerticalSelect
@@ -98,8 +150,10 @@ export const UpdateForm = () => {
         w={'100%'}
         rightIcon={<CheckCircle weight={'bold'} />}
         isDisabled={!isChanged}
+        onClick={handleSubmit}
+        isLoading={isSubmitting}
       >
-        更新する
+        {isTodaysRequestExists ? '更新する' : '今日の連絡をする'}
       </Button>
     </VStack>
   );
