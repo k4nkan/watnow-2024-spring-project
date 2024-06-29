@@ -115,3 +115,8 @@ export const existsDBMemberByUserUid = async (
     return docs.docs.length > 0;
   }
 };
+
+export const countDBMembers = async (groupUid: string): Promise<number> => {
+  const snapshot = await getDBMembers(groupUid);
+  return snapshot.size;
+};

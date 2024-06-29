@@ -8,7 +8,7 @@ interface Props {
 
 const TitleWithIcon = forwardRef<HTMLDivElement, Props>((props, ref) => {
   return (
-    <HStack ref={ref} mt={3} w={'100%'} justifyContent={'start'}>
+    <HStack ref={ref} mt={5} w={'100%'} justifyContent={'start'}>
       <Center h={8} w={8}>
         {props.ion}
       </Center>

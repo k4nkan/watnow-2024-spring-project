@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react';
 import { ArrowRight } from '@phosphor-icons/react';
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 interface alertProps {
   alertColorScheme:
@@ -23,10 +24,12 @@ interface alertProps {
   titleText: string;
   descriptionText: string;
   destination: string;
+  href?: string;
 }
 
 function Hint(props: alertProps) {
   const [isVisible, setIsVisible] = useState(true);
+  const navigation = useRouter();
 
   return (
     <>
@@ -42,6 +45,7 @@ function Hint(props: alertProps) {
               variant={'solid'}
               size={'sm'}
               colorScheme={props.buttonColorScheme}
+              onClick={() => props.href && navigation.push(props.href)}
             >
               {props.destination} に移動
             </Button>

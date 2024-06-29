@@ -1,15 +1,23 @@
 import Hint from '@/features/hint/components/Hint';
+import useMyDinnerRequest from '@/hooks/use-my-dinner-request';
+import { VStack } from '@chakra-ui/react';
 
 function HintSection() {
+  const { exists: isTodaysRequestExists } = useMyDinnerRequest();
+  const isLoading = isTodaysRequestExists === 'loading';
+
   return (
-    <>
-      <Hint
-        alertColorScheme={'warning'}
-        titleText={'今日の連絡がまだです！'}
-        descriptionText={'今夜、ごはんを家で食べたいのかを連絡しましょう！'}
-        destination={'連絡'}
-        buttonColorScheme={'orange'}
-      />
+    <VStack gap={4}>
+      {!isLoading && !isTodaysRequestExists && (
+        <Hint
+          alertColorScheme={'warning'}
+          titleText={'今日の連絡がまだです！'}
+          descriptionText={'今夜、ごはんを家で食べたいのかを連絡しましょう！'}
+          destination={'連絡'}
+          buttonColorScheme={'orange'}
+          href="/update"
+        />
+      )}
       <Hint
         alertColorScheme={'info'}
         titleText={'曜日ごとの予定をしよう！'}
@@ -18,8 +26,9 @@ function HintSection() {
         }
         destination={'設定'}
         buttonColorScheme={'blue'}
+        href="/settings"
       />
-    </>
+    </VStack>
   );
 }
 

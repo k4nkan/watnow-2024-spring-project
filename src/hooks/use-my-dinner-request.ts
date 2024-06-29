@@ -15,6 +15,11 @@ import { DBDinnerRequest } from '@/types/groups/db-group-dinner-requests';
 import useAuthUser from './use-auth-user';
 import { getUserDocRef } from '@/stores/firestore/users';
 
+export type updateRequestProps = Omit<
+  DBDinnerRequest,
+  'uid' | 'createdAt' | 'createdBy' | 'deletedAt' | 'date'
+>;
+
 const useMyDinnerRequest = () => {
   const [dinnerRequest, setDinnerRequest] = useAtom(dbMyDinnerRequestState);
   const [exists, setExists] = useAtom(dbMyDinnerRequestExistsState);
@@ -60,41 +65,74 @@ const useMyDinnerRequest = () => {
     return () => unsubscribe();
   }, [currentGroup, authUser, setDinnerRequest, setExists, today]);
 
-  const addRequest = useCallback(
+  const _addRequest = useCallback(
     async (
-      data: Omit<DBDinnerRequest, 'uid' | 'createdAt' | 'createdBy' | 'date'>
+      data: Omit<
+        DBDinnerRequest,
+        'uid' | 'createdAt' | 'createdBy' | 'deletedAt' | 'date'
+      >
     ) => {
-      if (
-        currentGroup === null ||
-        currentGroup === 'loading' ||
-        authUser === null
-      )
+      if (currentGroup === 'loading' || authUser === null) {
+        console.error('currentGroup or authUser is loading');
         return;
+      }
+      if (exists === 'loading') {
+        console.error('exists is loading');
+        return;
+      }
+      if (exists === true) {
+        console.error('request already exists');
+        return;
+      }
+      if (currentGroup === null) {
+        console.error('currentGroup is null');
+        return;
+      }
       const newRequest = {
         ...data,
         createdAt: Timestamp.now(),
         createdBy: getUserDocRef(authUser.uid),
+        deletedAt: null,
         date: todayTimestamp
       };
       await addDBDinnerRequest(currentGroup.uid, newRequest);
     },
-    [currentGroup, authUser, todayTimestamp]
+    [currentGroup, authUser, exists, todayTimestamp]
   );
 
   const updateRequest = useCallback(
-    async (requestUid: string, data: Partial<DBDinnerRequest>) => {
+    async (
+      data: Omit<
+        DBDinnerRequest,
+        'uid' | 'createdAt' | 'createdBy' | 'deletedAt' | 'date'
+      >
+    ) => {
+      if (dinnerRequest === 'loading') {
+        console.error('dinnerRequest is loading');
+        return;
+      } else if (dinnerRequest === null) {
+        _addRequest(data);
+        return;
+      }
+      const requestUid = dinnerRequest?.uid;
       if (
         currentGroup === null ||
         currentGroup === 'loading' ||
-        authUser === null
-      )
+        authUser === null ||
+        exists === 'loading'
+      ) {
+        console.error('currentGroup or authUser or exists is null or loading');
         return;
+      }
+      if (exists === false) {
+        _addRequest(data);
+      }
       await updateDBDinnerRequest(currentGroup.uid, requestUid, data);
     },
-    [currentGroup, authUser]
+    [dinnerRequest, currentGroup, authUser, exists, _addRequest]
   );
 
-  return { dinnerRequest, exists, addRequest, updateRequest };
+  return { dinnerRequest, exists, updateRequest };
 };
 
 export default useMyDinnerRequest;

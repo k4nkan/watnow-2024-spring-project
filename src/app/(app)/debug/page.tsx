@@ -2,12 +2,14 @@
 
 import InputWithLabel from '@/components/InputWithLabel';
 import PageTitle from '@/components/PageTitle';
+import MyDinnerRequests from '@/features/debug/MyDinnerRequests';
+import TodaysDinnerRequests from '@/features/debug/TodaysDinnerRequests';
 import useAuthUser from '@/hooks/use-auth-user';
 import useCurrentGroup from '@/hooks/use-current-group';
 import { createGroupByUser } from '@/stores/firestore/user-group-transaction';
 import { getUserDocRef } from '@/stores/firestore/users';
 import { DBGroup } from '@/types/db-group';
-import { Button } from '@chakra-ui/react';
+import { Button, Divider } from '@chakra-ui/react';
 import { Timestamp } from 'firebase/firestore';
 import React from 'react';
 
@@ -46,7 +48,9 @@ export default function Page() {
   return (
     <div className="flex flex-col gap-2 p-4">
       <PageTitle titleText="Debug" />
-      <Button onClick={createGroup}>グループを作成</Button>
+      <Button onClick={createGroup} isDisabled>
+        グループを作成
+      </Button>
       <InputWithLabel
         label="グループID"
         value={groupId}
@@ -69,6 +73,10 @@ export default function Page() {
           <div>グループUID: {currentGroup?.uid}</div>
         </div>
       </div>
+      <Divider />
+      <TodaysDinnerRequests />
+      <Divider />
+      <MyDinnerRequests />
     </div>
   );
 }
