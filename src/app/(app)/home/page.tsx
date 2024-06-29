@@ -7,6 +7,7 @@ import ForecastStatusSection from '@/features/forecast-status/ForecastStatusSect
 import HintSection from '@/features/hint/HintSection';
 import { useScrollButton } from '@/hooks/use-scroll-button';
 import { useEffect, useRef } from 'react';
+import ForecastSection from '@/features/forecast/ForecastSection';
 
 const Page = () => {
   const { setScrollTarget } = useScrollButton();
@@ -26,6 +27,7 @@ const Page = () => {
           text="今日のご飯予報"
           ion={<Onigiri size={24} weight="bold" />}
         />
+        <ForecastSection />
         <ForecastStatusSection />
         <TitleWithIcon
           ref={scrollRef}

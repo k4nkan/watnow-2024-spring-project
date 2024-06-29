@@ -2,7 +2,7 @@ import { Heading } from '@chakra-ui/react';
 import { BowlContainer } from './BowlContainer';
 
 interface PortionIndicatorProps {
-  portion: number;
+  portion: string | number;
   isPending?: boolean;
 }
 
