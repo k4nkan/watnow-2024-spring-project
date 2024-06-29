@@ -5,6 +5,7 @@ import { getDBGroup, getGroupRef } from '@/stores/firestore/groups';
 import { onSnapshot } from 'firebase/firestore';
 import { DBGroup } from '@/types/db-group';
 import { DBHookProps } from '@/types/db-hooks-props';
+import { set } from 'firebase/database';
 
 const useCurrentGroup = (options?: DBHookProps) => {
   const [currentGroup, setCurrentGroup] = useAtom(dbGroupState);
@@ -13,6 +14,8 @@ const useCurrentGroup = (options?: DBHookProps) => {
   useEffect(() => {
     if (currentGroupUid === null) {
       console.warn('currentGroupUid is null');
+      setCurrentGroup(null);
+      setCurrentGroupUid(null);
       return;
     }
 
@@ -30,7 +33,7 @@ const useCurrentGroup = (options?: DBHookProps) => {
         setCurrentGroup(group);
       });
     }
-  }, [currentGroupUid, options?.realtime, setCurrentGroup]);
+  }, [currentGroupUid, options?.realtime, setCurrentGroup, setCurrentGroupUid]);
 
   const changeGroup = useCallback(
     (uid: string) => {
