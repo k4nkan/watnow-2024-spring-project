@@ -1,12 +1,13 @@
 import { useEffect, useMemo } from 'react';
 import { useAtom } from 'jotai';
 import {
+  AdditionalRequest,
   dbTodaysDinnerRequestsState,
   dbTodaysDinnerRequestsSummaryState
 } from '@/states/db/todays-dinner-requests';
 import { dbGroupState } from '@/states/db/current-group';
 import { getDinnerRequestsRef } from '@/stores/firestore/groups/dinner-requests';
-import { onSnapshot, Timestamp } from 'firebase/firestore';
+import { onSnapshot, query, Timestamp, where } from 'firebase/firestore';
 import { DBDinnerRequest } from '@/types/groups/db-group-dinner-requests';
 
 const useTodaysDinnerRequests = () => {
@@ -28,14 +29,17 @@ const useTodaysDinnerRequests = () => {
     if (currentGroup === null || currentGroup === 'loading') return;
 
     const unsubscribe = onSnapshot(
-      getDinnerRequestsRef(currentGroup.uid),
+      query(
+        getDinnerRequestsRef(currentGroup.uid),
+        where('date', '==', todayTimestamp)
+      ),
       (snapshot) => {
-        const requests = snapshot.docs
-          .map((doc) => doc.data() as DBDinnerRequest)
-          .filter(
-            (request) =>
-              request.date.toDate().toDateString() === today.toDateString()
-          );
+        const requests = snapshot.docs.map(
+          (doc) => doc.data() as DBDinnerRequest
+        );
+
+        console.log('requests', requests);
+
         setDinnerRequests(requests);
 
         const totalPortions = requests.reduce(
@@ -43,8 +47,14 @@ const useTodaysDinnerRequests = () => {
           0
         );
         const totalRequests = requests.length;
-        const additionalRequests = requests
-          .map((request) => request.additionalRequests || '')
+        const additionalRequests: AdditionalRequest[] = requests
+          .filter((request) => request.additionalRequests !== null)
+          .map((request) => {
+            return {
+              userUid: request.createdBy.id,
+              requestText: request.additionalRequests!
+            };
+          })
           .filter(Boolean);
 
         setSummary({ totalRequests, totalPortions, additionalRequests });
@@ -52,7 +62,7 @@ const useTodaysDinnerRequests = () => {
     );
 
     return () => unsubscribe();
-  }, [currentGroup, setDinnerRequests, setSummary, today]);
+  }, [currentGroup, setDinnerRequests, setSummary, today, todayTimestamp]);
 
   return { dinnerRequests, summary };
 };

@@ -3,15 +3,24 @@
 import PageDownButton from '@/components/PageDownButton';
 import TabBar from '@/components/TabBar';
 import { NavigationBar } from '@/features/navigation-bar/NavigationBar';
+import useAuthUser from '@/hooks/use-auth-user';
 import useCurrentGroup from '@/hooks/use-current-group';
 import { useCurrentUser } from '@/hooks/use-current-user';
 import { useScrollButton } from '@/hooks/use-scroll-button';
+import {
+  addDBMember,
+  existsDBMember,
+  existsDBMemberByUserUid
+} from '@/stores/firestore/groups/members';
+import { getUserDocRef } from '@/stores/firestore/users';
 import { Box, Center, Spinner, VStack } from '@chakra-ui/react';
+import { Timestamp } from 'firebase/firestore';
 import { useRouter } from 'next/navigation';
 import { PropsWithChildren, useCallback, useEffect, useState } from 'react';
 
 export default function AppLayout({ children }: PropsWithChildren) {
   const { currentUser, loading: loadingCurrentUser } = useCurrentUser();
+  const { authUser } = useAuthUser();
   const [signedIn, setSignedIn] = useState(false);
   const router = useRouter();
 
@@ -21,8 +30,29 @@ export default function AppLayout({ children }: PropsWithChildren) {
     console.log(currentGroup);
     if (currentGroup === null) {
       changeGroup('lBbYQHxvVjITTZdTUT7H');
+    } else {
+      if (authUser !== null && currentGroup !== 'loading') {
+        const data = {
+          createdAt: Timestamp.fromDate(new Date()),
+          user: getUserDocRef(authUser.uid)
+        };
+        existsDBMemberByUserUid(currentGroup.uid, authUser.uid).then(
+          (exists) => {
+            if (exists) {
+              console.log('already exists');
+              return;
+            } else {
+              console.log(currentGroup.uid, data);
+
+              addDBMember(currentGroup.uid, data).then(() => {
+                console.log('addDBMember done');
+              });
+            }
+          }
+        );
+      }
     }
-  }, [currentGroup, changeGroup]);
+  }, [currentGroup, changeGroup, currentUser, authUser]);
 
   const {
     setAvailablePages,
