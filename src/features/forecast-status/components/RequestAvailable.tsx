@@ -1,9 +1,9 @@
 import React from 'react';
 import Layout from './Layout';
 import { Box, VStack } from '@chakra-ui/react';
-import { SampleRequests } from './SampleRequests';
 import { AdditionalRequest } from '@/states/db/todays-dinner-requests';
 import { RequestListItem } from './RequestListItem';
+import { SampleRequests } from './SampleRequests';
 
 interface RequestAvailableProps {
   additionalRequests: AdditionalRequest[];
@@ -26,7 +26,7 @@ export const RequestAvailable = ({
         borderRadius={'lg'}
         opacity={0.03}
       />
-      <VStack pt={2} px={2}>
+      {/* <VStack pt={2} px={2}>
         {additionalRequests.map((request, index) => (
           <RequestListItem
             key={index}
@@ -35,7 +35,8 @@ export const RequestAvailable = ({
             name="Segun Adebayo"
           />
         ))}
-      </VStack>
+      </VStack> */}
+      <SampleRequests />
     </Layout>
   );
 };
